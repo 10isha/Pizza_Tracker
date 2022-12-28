@@ -9,6 +9,27 @@ const path = require('path')
 app.get('/',(req,res)=>{
     res.render('home')
 })
+app.get('/menu',(req,res)=>{
+    res.render('menu')
+})
+app.get('/services',(req,res)=>{
+    res.render('services')
+})
+app.get('/about',(req,res)=>{
+    res.render('about')
+})
+app.get('/blog',(req,res)=>{
+    res.render('blog')
+})
+app.get('/blog-single',(req,res)=>{
+    res.render('blog-single')
+})
+app.get('/contact',(req,res)=>{
+    res.render('contact')
+})
+app.get('/cart',(req,res)=>{
+    res.render('cart')
+})
 //Assets
 app.use(express.static('public'))
 //set template engine
