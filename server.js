@@ -30,6 +30,12 @@ app.get('/contact',(req,res)=>{
 app.get('/cart',(req,res)=>{
     res.render('cart')
 })
+app.get('/login',(req,res)=>{
+    res.render('auth/login')
+})
+app.get('/register',(req,res)=>{
+    res.render('auth/register')
+})
 //Assets
 app.use(express.static('public'))
 //set template engine
