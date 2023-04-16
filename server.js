@@ -1,41 +1,56 @@
+require('dotenv').config()
 const express = require('express')
 const app = express()
 const ejs = require('ejs')
 const expressLayout = require('express-ejs-layouts')
 const PORT = process.env.PORT || 3000
 const path = require('path')
+const mongoose = require('mongoose')
+const session = require('express-session')
+const flash = require('express-flash')
+const MongoDbStore = require('connect-mongo')(session)
+// const cookieParser = require('cookie-parser')
 
+app.use(express.json())
+//Database connection
+mongoose.set('strictQuery', true);
+mongoose.connect('mongodb://127.0.0.1/Pizza',
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  }
+);
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "connection error: "));
+db.once("open", function () {
+  console.log("Connected successfully");
+});
 
-app.get('/',(req,res)=>{
-    res.render('home')
+require('./routes/web')(app)
+
+//session store
+let mongoStore = new MongoDbStore({
+  mongooseConnection : db,
+  collection: 'sessions'
 })
-app.get('/menu',(req,res)=>{
-    res.render('menu')
-})
-app.get('/services',(req,res)=>{
-    res.render('services')
-})
-app.get('/about',(req,res)=>{
-    res.render('about')
-})
-app.get('/blog',(req,res)=>{
-    res.render('blog')
-})
-app.get('/blog-single',(req,res)=>{
-    res.render('blog-single')
-})
-app.get('/contact',(req,res)=>{
-    res.render('contact')
-})
-app.get('/cart',(req,res)=>{
-    res.render('cart')
-})
-app.get('/login',(req,res)=>{
-    res.render('auth/login')
-})
-app.get('/register',(req,res)=>{
-    res.render('auth/register')
-})
+//global middleware
+// app.use((req,res,next)=>{
+//     res.locals.session = req.session
+//     next()
+// })
+//session config
+// app.use(cookieParser())
+// app.use(express.cookieParser('your secret option here'));
+app.use(session({
+  secret: 'hemlo',
+  // secret: process.env.SECRET,
+  resave:false,
+  store: mongoStore,
+  saveUninitialized: true,
+  cookie: { maxAge: 1000 * 60 * 60 * 24 } //24
+}))
+app.use(flash())
+
 //Assets
 app.use(express.static('public'))
 //set template engine

@@ -79,67 +79,26 @@
     	</div>
     	<div class="container-wrap">
     		<div class="row no-gutters d-flex">
-    			<div class="col-lg-4 d-flex ftco-animate">
-    				<div class="services-wrap d-flex">
-    					<a href="#" class="img" style="background-image: url(images/pizza-1.jpg);"></a>
-    					<div class="text p-4">
-    						<h3>Italian Pizza</h3>
-    						<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia </p>
-    						<p class="price"><span>$2.90</span> <a href="#" class="ml-2 btn btn-white btn-outline-white">Order</a></p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-lg-4 d-flex ftco-animate">
-    				<div class="services-wrap d-flex">
-    					<a href="#" class="img" style="background-image: url(images/pizza-2.jpg);"></a>
-    					<div class="text p-4">
-    						<h3>Greek Pizza</h3>
-    						<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
-    						<p class="price"><span>$2.90</span> <a href="#" class="ml-2 btn btn-white btn-outline-white">Order</a></p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-lg-4 d-flex ftco-animate">
-    				<div class="services-wrap d-flex">
-    					<a href="#" class="img" style="background-image: url(images/pizza-3.jpg);"></a>
-    					<div class="text p-4">
-    						<h3>Caucasian Pizza</h3>
-    						<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
-    						<p class="price"><span>$2.90</span> <a href="#" class="ml-2 btn btn-white btn-outline-white">Order</a></p>
-    					</div>
-    				</div>
-    			</div>
-
-    			<div class="col-lg-4 d-flex ftco-animate">
-    				<div class="services-wrap d-flex">
-    					<a href="#" class="img order-lg-last" style="background-image: url(images/pizza-4.jpg);"></a>
-    					<div class="text p-4">
-    						<h3>American Pizza</h3>
-    						<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia </p>
-    						<p class="price"><span>$2.90</span> <a href="#" class="ml-2 btn btn-white btn-outline-white">Order</a></p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-lg-4 d-flex ftco-animate">
-    				<div class="services-wrap d-flex">
-    					<a href="#" class="img order-lg-last" style="background-image: url(images/pizza-5.jpg);"></a>
-    					<div class="text p-4">
-    						<h3>Tomatoe Pie</h3>
-    						<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
-    						<p class="price"><span>$2.90</span> <a href="#" class="ml-2 btn btn-white btn-outline-white">Order</a></p>
-    					</div>
-    				</div>
-    			</div>
-    			<div class="col-lg-4 d-flex ftco-animate">
-    				<div class="services-wrap d-flex">
-    					<a href="#" class="img order-lg-last" style="background-image: url(images/pizza-6.jpg);"></a>
-    					<div class="text p-4">
-    						<h3>Margherita</h3>
-    						<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
-    						<p class="price"><span>$2.90</span> <a href="#" class="ml-2 btn btn-white btn-outline-white">Order</a></p>
-    					</div>
-    				</div>
-    			</div>
+				<!-- from here -->
+				<% pizzas.forEach(function(pizza){ %>
+					<div class="col-lg-4 d-flex ftco-animate">
+						<div class="services-wrap d-flex">
+							<!-- <img class="h-40 mb-4 mx-auto" src="images/<%= pizza.image %>" alt=""> -->
+							<a href="#" class="img" style="background-image: url(images/<%=pizza.image%>)"></a>
+							<div class="text p-4">
+								<h3><%= pizza.name %></h3>
+								<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia </p>
+								<p class="price"><span> &#x20b9; <%= pizza.price %></span> 
+									<!-- <a data-pizza="<%= JSON.stringify(pizza) %>" href="#" class="add-to-cart ml-2 btn btn-white btn-outline-white">Add to Cart</a> -->
+									<button data-pizza="<%=JSON.stringify(pizza)%>" class="add-to-cart ml-2 btn btn-white btn-outline-white">
+										<span class="">Add to Cart</span>
+									</button>
+								</p>
+							</div>
+						</div>
+					</div>
+			   <% }) %>
+    			<!-- till here -->
     		</div>
     	</div>
 
@@ -507,9 +466,6 @@
         <div class="row">
           <div class="col-md-12 text-center">
 
-            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
           </div>
         </div>
       </div>
@@ -538,6 +494,6 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
-    
+  <script type="text/javascript" src="https://unpkg.com/default-passive-events"></script>
   </body>
 </html>
